@@ -72,17 +72,22 @@ def intFuzz(value, point):
         print(f"{value} passed point #{point}")
         if point == "1":
             if value == "2":
+                #choice === 2 (1a)
                 for char in (chr(i) for i in range (32, 127)):
+                    #encrypt method
                     intFuzz(char, "1b")
             for char in (chr(i) for i in range (32, 127)):
+                #crack method
                 intFuzz(char, "2")
         elif point == "2":
             for char in (chr(i) for i in range (32, 127)):
+                #target
                 strFuzz(char, "3")
     except:
         print(f"{value} failed point #{point}")
 
 for char in (chr(i) for i in range (32, 127)):
+    #choice
     intFuzz(char, "1")
 
 """ 
