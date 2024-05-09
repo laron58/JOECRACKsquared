@@ -86,6 +86,13 @@ def intFuzz(value, point):
     except:
         print(f"{value} failed point #{point}")
 
+def strFuzz(value, point):
+    try:
+        toStr = str(value)
+        print(f"{value} passed point #{point}")
+    except ValueError:
+        print(f"{value} failed point #{point}")
+        
 for char in (chr(i) for i in range (32, 127)):
     #choice
     intFuzz(char, "1")
