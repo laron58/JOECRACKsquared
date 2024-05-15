@@ -1,56 +1,57 @@
+import itertools
 import time
 
-methodList = []
-def intFuzz(name, max, repeat = 1, chrLim = 126, value = ""):
-    if repeat == 0:
-        if value == " " or value == "  ":
-            print(f"Fuzzing {name} block...")
-            time.sleep(1)
-        try:
-            toInt = int(value)
-            if toInt > max or toInt < 1:
-                raise ValueError
-            print(f"{value} passed {name} check")
-        except ValueError:
-            #print(f"{value} failed point #{point}")
-            lists[f"{name}Crashes"].append(value)
-            logList.append(f"{value} crashed {name} check")
-    else:
-        for char in (chr(i) for i in range (32, chrLim + 1)):
-            # Creates value recursively
-            newVal = value + char
-            intFuzz(name, max, repeat - 1, chrLim, newVal)
-
-def strFuzz(name, repeat = 1, chrLim = 126, value = ""):
-    if repeat == 0:
-        if value == " " or value == "  ":
-            print(f"Fuzzing {name} block...")
-            time.sleep(1)
-        #print(value)
-        try:
-            toStr = str(value)
-            if ord(toStr[0]) < 32 or ord(toStr[0]) > 126:
-                raise ValueError
-            if name == "methodArg":
-                if toStr != "-b" and toStr != "-d":
+def intFuzz(name, max, length = 1, chrLim = 126):
+    print(f"Fuzzing {name} block...")
+    time.sleep(1)
+    charList = []
+    for char in (chr(i) for i in range (32, chrLim + 1) if i not in range(127, 160)):
+        charList.append(char)
+    chars = "".join(charList)
+    #print(chars)
+    for len in range(1, length + 1):
+        for comb in (itertools.product(chars, repeat = len)):
+            value = "".join(comb)
+            try:
+                toInt = int(value)
+                if toInt > max or toInt < 1:
                     raise ValueError
-            elif name == "choiceArg":
-                if toStr != "-p" and toStr != "-e":
-                    raise ValueError
-            elif name == "encryptModeArg":
-                if toStr != "-m" and toStr != "-s" and toStr != "-b":
-                    raise ValueError
-            if name != "password":
                 print(f"{value} passed {name} check")
-        except ValueError:
-            #print(f"{value} failed point #{point}")
-            lists[f"{name}Crashes"].append(value)
-            logList.append(f"{value} crashed {name} check")
-    else:
-        for char in (chr(i) for i in range (32, chrLim + 1)):
-            # Creates value recursively
-            newVal = value + char
-            strFuzz(name, repeat - 1, chrLim, newVal)
+            except ValueError:
+                #print(f"{value} failed point #{point}")
+                lists[f"{name}Crashes"].append(value)
+                logList.append(f"{value} crashed \"{name}\"")
+
+def strFuzz(name, length = 1, chrLim = 126):
+    print(f"Fuzzing {name} block...")
+    time.sleep(1)
+    charList = []
+    for char in (chr(i) for i in range (32, chrLim + 1) if i not in range(127, 160)):
+        charList.append(char)
+    chars = "".join(charList)
+    #print(chars)
+    for len in range(1, length + 1):
+        for comb in (itertools.product(chars, repeat = len)):
+            value = "".join(comb)
+            try:
+                toStr = str(value)
+                if ord(toStr[0]) < 32 or ord(toStr[0]) > 126:
+                    raise ValueError
+                if name == "methodArg":
+                    if toStr != "-b" and toStr != "-d":
+                        raise ValueError
+                elif name == "choiceArg":
+                    if toStr != "-p" and toStr != "-e":
+                        raise ValueError
+                elif name == "encryptModeArg":
+                    if toStr != "-m" and toStr != "-s" and toStr != "-b":
+                        raise ValueError
+                if name != "password" and name != "test":
+                    print(f"{value} passed {name} check")
+            except ValueError:
+                #print(f"{value} failed point #{point}")
+                lists[f"{name}Crashes"].append(value)
+                logList.append(f"{value} crashed \"{name}\"")
 
 logList = []
 lists = {
@@ -64,10 +65,10 @@ lists = {
 }
 
 try:
-    intFuzz("choice", 2, 2)
-    intFuzz("encryptMode", 3)
-    intFuzz("method", 2)
-    strFuzz("password", 2, 591)
+    intFuzz("choice", 2)
+    intFuzz("encryptMode", 3, chrLim = 591)
+    intFuzz("method", 2, 2)
+    strFuzz("password", 1, 591)
     strFuzz("methodArg", 2)
     strFuzz("choiceArg", 2)
     strFuzz("encryptModeArg", 2)
