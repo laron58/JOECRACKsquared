@@ -17,7 +17,7 @@ For even more fun, check out this website to see what decimal values to plug in:
 - itertools
 - time
   
-### Rubric (59/55)
+### Rubric (39/35)
 - [x] Regular usage of version control software (3)
 - [x] Data mutator (5/10)
      - [x] Begins with a valid input data for the target program (5)
@@ -25,10 +25,6 @@ For even more fun, check out this website to see what decimal values to plug in:
 - [x] Fuzzer (20)
      - [x] Choose a target program (10)
      - [x] Create a condition to stop the fuzzer (10)
-- [ ] Presentation (20)
-     - [x] Well-Designed Slides (5)
-     - [x] Engaging (10)
-     - [x] Responds to questions well (5)
 - [x] README.md (1/2)
      - [x] Dependencies (1)
      - [ ] Commands and arguments to run (1)
