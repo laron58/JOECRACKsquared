@@ -8,7 +8,7 @@ In their default states, the two fuzzing functions will only test single charact
 
 Also, by default, intFuzz and strFuzz will only test ASCII printables. If you want more results, you can extend the character limit with the chrLim argument (inclusive). 591 will get you through the Latin extensions.
 
-For even more fun, check out this website to see what decimal values to plug in: https://www.ssec.wisc.edu/~tomw/java/unicode.html#x0180
+For even more fun, check out this website to see what decimal values to plug in: https://www.ssec.wisc.edu/~tomw/java/unicode.html
 
 ### Command line:
 `python3 joecrack2.py` 
