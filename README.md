@@ -29,7 +29,7 @@ For even more fun, check out this website to see what decimal values to plug in:
      - [x] Dependencies (1)
      - [ ] Commands and arguments to run (1)
 - [x] Extentions (+10)
-     - [x] Fuzzing program saves data that causes crashes to a file (5)
-           Sepearate files with list of values that cause crashes for every test point
-     - [x] Fuzzing program logs crashes with associated data and info (5)
-           Full crash log with values & associated points
+     - [x] Fuzzing program saves data that causes crashes to a file (+5)
+         - Sepearate files for every test point with list of values that cause crashes
+     - [x] Fuzzing program logs crashes with associated data and info (+5)
+         - Full crash log with values & associated points
