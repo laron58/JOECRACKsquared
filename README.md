@@ -1,7 +1,7 @@
 ## JOECRACK² — JOECRACKcrack(er), a fuzzer for [Joe's password cracker](https://github.com/JosephL8912/PasswordCrack)
 
-### Explanation:
-**DISCLAIMER:** This is very very very basic level fuzzing. You normally wouldn't have access to the code/backend of something you wanted to fuzz in the real world, and I only use values that are 1-2 characters long (by default, for demonstration purposes). Also, I have modified Joe's code to throw exceptions when the user enters a value that is out of bounds.
+### DISCLAIMER:
+This is very very very basic level fuzzing. You normally wouldn't have access to the code/backend of something you wanted to fuzz in the real world, and I only use values that are 1-2 characters long (by default, for demonstration purposes). Also, I have modified Joe's code to throw exceptions when the user enters a value that is out of bounds.
 
 ### Usage:
 In their default states, the two fuzzing functions will only test single characters. This can be modified using the length argument, just add (or change) the number where the functions are called.
